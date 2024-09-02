@@ -12,8 +12,10 @@ import { Provider } from "react-redux";
 import { store } from "./app/store.js";
 
 import {
-  Feed,
-  Home,
+  Login,
+  SignUp,
+  AuthLayout,
+  PageNotFound
 } from "./components/index.js";
 
 
@@ -23,110 +25,6 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="" element={<Home />}>
-        <Route path="" element={<Feed />}>
-          {/* Home Page Feed Videos */}
-          <Route path="" element={<FeedVideos />} />
-
-          {/* Home Page Feed Tweets */}
-          <Route
-            path="tweets"
-            element={
-              <AuthLayout authentication guestComponent={<GuestTweets />}>
-                <FeedTweets />
-              </AuthLayout>
-            }
-          />
-
-          {/* Playlists */}
-          <Route path="playlist/:playlistId" element={<PlaylistVideos />} />
-
-          {/* All Other Channels */}
-          <Route path="user/:username" element={<Channel />}>
-            <Route path="" element={<ChannelVideos owner={false} />} />
-            <Route path="playlists" element={<ChannelPlaylist owner={false} />} />
-            <Route path="tweets" element={<ChannelTweets />} owner={false} />
-            <Route path="subscribed" element={<ChannelSubscribed owner={false} />} />
-            <Route path="about" element={<AboutChannel owner={false} />} />
-          </Route>
-
-          {/* Owning My Channel(currently Logged in user) */}
-          <Route
-            path="channel/:username"
-            element={
-              <AuthLayout authentication guestComponent={<GuestMyChannel />}>
-                <Channel owner />
-              </AuthLayout>
-            }
-          >
-            <Route path="" element={<ChannelVideos owner />} />
-            <Route path="tweets" element={<ChannelTweets owner />} />
-            <Route path="playlists" element={<ChannelPlaylist owner />} />
-            <Route path="subscribed" element={<ChannelSubscribed owner />} />
-            <Route path="about" element={<AboutChannel owner />} />
-          </Route>
-
-          {/* Search Results */}
-          <Route path="/results" element={<SearchResult />} />
-
-          {/* User Feeds */}
-          <Route
-            path="feed/history"
-            element={
-              <AuthLayout authentication guestComponent={<GuestHistory />}>
-                <History />
-              </AuthLayout>
-            }
-          />
-
-          {/* Liked Videos */}
-          <Route
-            path="feed/liked"
-            element={
-              <AuthLayout authentication guestComponent={<GuestLikedVideos />}>
-                <LikedVideos />
-              </AuthLayout>
-            }
-          />
-
-          {/* <Subscribers /> */}
-          <Route
-            path="feed/subscribers"
-            element={
-              <AuthLayout authentication guestComponent={<GuestSubscribers />}>
-                <ChannelSubscribed owner isSubscribers />
-              </AuthLayout>
-            }
-          />
-
-          {/* Settings */}
-          <Route
-            path="settings"
-            element={
-              <AuthLayout authentication>
-                <Settings />
-              </AuthLayout>
-            }
-          />
-
-          {/* Support */}
-          <Route path="support" element={<Support />} />
-        </Route>
-
-        {/* Video Watching */}
-        <Route path="/watch/:videoId" element={<VideoDetail />} />
-
-        {/* Admin Dashboard */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <AuthLayout authentication guestComponent={<GuestAdmin />}>
-              <Dashboard />
-            </AuthLayout>
-          }
-        />
-      </Route>
-
       {/* Login  */}
       <Route
         path="/login"
