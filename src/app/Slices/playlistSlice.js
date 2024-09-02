@@ -142,21 +142,6 @@ const playlistSlice = createSlice({
       state.status = false;
     });
 
-    // get Current Playlists
-    builder.addCase(getCurrentPlaylists.pending, (state) => {
-      state.loading = true;
-      state.data = null;
-    });
-    builder.addCase(getCurrentPlaylists.fulfilled, (state, action) => {
-      state.loading = false;
-      state.data = action.payload;
-      state.status = true;
-    });
-    builder.addCase(getCurrentPlaylists.rejected, (state) => {
-      state.loading = false;
-      state.status = false;
-    });
-
     // create Playlist
     builder.addCase(createPlaylist.pending, (state) => {
       state.loading = true;

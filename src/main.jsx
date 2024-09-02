@@ -1,53 +1,160 @@
-import React, { lazy, Suspense } from 'react';
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import store from './utils/Store.js'
-import Loader from './components/Loader.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./app/store.js";
+
+import {
+  Feed,
+  Home,
+} from "./components/index.js";
 
 
 
-const Login = lazy(() => import('./components/Authentication/Login.jsx'));
-const Signup = lazy(() => import('./components/Authentication/Signup.jsx'));
 
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path="" element={<Home />}>
+        <Route path="" element={<Feed />}>
+          {/* Home Page Feed Videos */}
+          <Route path="" element={<FeedVideos />} />
 
+          {/* Home Page Feed Tweets */}
+          <Route
+            path="tweets"
+            element={
+              <AuthLayout authentication guestComponent={<GuestTweets />}>
+                <FeedTweets />
+              </AuthLayout>
+            }
+          />
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        path: '/login',
-        element: (
-          <Suspense fallback={<Loader />}>
+          {/* Playlists */}
+          <Route path="playlist/:playlistId" element={<PlaylistVideos />} />
+
+          {/* All Other Channels */}
+          <Route path="user/:username" element={<Channel />}>
+            <Route path="" element={<ChannelVideos owner={false} />} />
+            <Route path="playlists" element={<ChannelPlaylist owner={false} />} />
+            <Route path="tweets" element={<ChannelTweets />} owner={false} />
+            <Route path="subscribed" element={<ChannelSubscribed owner={false} />} />
+            <Route path="about" element={<AboutChannel owner={false} />} />
+          </Route>
+
+          {/* Owning My Channel(currently Logged in user) */}
+          <Route
+            path="channel/:username"
+            element={
+              <AuthLayout authentication guestComponent={<GuestMyChannel />}>
+                <Channel owner />
+              </AuthLayout>
+            }
+          >
+            <Route path="" element={<ChannelVideos owner />} />
+            <Route path="tweets" element={<ChannelTweets owner />} />
+            <Route path="playlists" element={<ChannelPlaylist owner />} />
+            <Route path="subscribed" element={<ChannelSubscribed owner />} />
+            <Route path="about" element={<AboutChannel owner />} />
+          </Route>
+
+          {/* Search Results */}
+          <Route path="/results" element={<SearchResult />} />
+
+          {/* User Feeds */}
+          <Route
+            path="feed/history"
+            element={
+              <AuthLayout authentication guestComponent={<GuestHistory />}>
+                <History />
+              </AuthLayout>
+            }
+          />
+
+          {/* Liked Videos */}
+          <Route
+            path="feed/liked"
+            element={
+              <AuthLayout authentication guestComponent={<GuestLikedVideos />}>
+                <LikedVideos />
+              </AuthLayout>
+            }
+          />
+
+          {/* <Subscribers /> */}
+          <Route
+            path="feed/subscribers"
+            element={
+              <AuthLayout authentication guestComponent={<GuestSubscribers />}>
+                <ChannelSubscribed owner isSubscribers />
+              </AuthLayout>
+            }
+          />
+
+          {/* Settings */}
+          <Route
+            path="settings"
+            element={
+              <AuthLayout authentication>
+                <Settings />
+              </AuthLayout>
+            }
+          />
+
+          {/* Support */}
+          <Route path="support" element={<Support />} />
+        </Route>
+
+        {/* Video Watching */}
+        <Route path="/watch/:videoId" element={<VideoDetail />} />
+
+        {/* Admin Dashboard */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AuthLayout authentication guestComponent={<GuestAdmin />}>
+              <Dashboard />
+            </AuthLayout>
+          }
+        />
+      </Route>
+
+      {/* Login  */}
+      <Route
+        path="/login"
+        element={
+          <AuthLayout authentication={false}>
             <Login />
-          </Suspense>
-        )
-      },
-      {
-        path: '/signup',
-        element: (
-          <Suspense fallback={<Loader />}>
-            <Signup />
-          </Suspense>
-        )
-      }
-    ]
-  }
-])
+          </AuthLayout>
+        }
+      />
 
+      {/* Sign up */}
+      <Route
+        path="/signup"
+        element={
+          <AuthLayout authentication={false}>
+            <SignUp />
+          </AuthLayout>
+        }
+      />
 
+      {/* 404 */}
+      <Route path="*" element={<PageNotFound />} />
+    </Route>
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
-    </Provider>
-  </React.StrictMode>,
-)
+  ));
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);
