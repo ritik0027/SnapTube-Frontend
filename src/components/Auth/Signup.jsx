@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { register as createAccount } from "../../app/Slices/userSlice";
 import { icons } from "../../assets/icons";
+
+
 function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ function SignUp() {
   return (
     <div className="h-screen w-full overflow-y-auto bg-[#121212] text-white">
       <div className="mx-auto my-8 flex w-full max-w-sm flex-col px-4">
-        <div className="mx-auto inline-block w-16">
+        <div className="mx-20 inline-block w-16 ">
           <Logo />
         </div>
         <div className="mb-2 w-full text-center text-2xl font-semibold uppercase">
