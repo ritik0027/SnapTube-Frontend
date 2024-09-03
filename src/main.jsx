@@ -15,8 +15,12 @@ import {
   Login,
   SignUp,
   AuthLayout,
-  PageNotFound
+  PageNotFound,
+  Home,
+  Feed,
 } from "./components/index.js";
+
+import FeedVideos from "./pages/FeedVideos.jsx";
 
 
 
@@ -25,13 +29,20 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      <Route path="" element={<Home />}>
+        <Route path="" element={<Feed />}>
+          {/* Home Page Feed Videos */}
+          <Route path="" element={<FeedVideos />} />
+        </Route>
+      </Route>
+
       {/* Login  */}
       <Route
         path="/login"
         element={
-          <AuthLayout authentication={false}>
+          
             <Login />
-          </AuthLayout>
+         
         }
       />
 
@@ -48,6 +59,8 @@ const router = createBrowserRouter(
       {/* 404 */}
       <Route path="*" element={<PageNotFound />} />
     </Route>
+
+
 
   ));
 

@@ -10,6 +10,8 @@ import SignUp from "./Auth/SignUp";
 import Input from "./Atoms/Input";
 import Button from "./Atoms/Button";
 import PageNotFound from "./Atoms/PageNotFound";
+import EmptyVideo from "./Video/EmptyVideo";
+import VideoGrid from "./Video/VideoGrid";
 
 
 
@@ -28,7 +30,11 @@ export {
     SignUp,
     Input,
     Button,
-    PageNotFound
+    PageNotFound,
+    EmptyVideo,
+    VideoGrid,
+    
+
 
     
 

@@ -43,7 +43,7 @@ function Login() {
   return (
     <div className="h-screen w-full overflow-y-auto bg-[#121212] text-white">
       <div className="mx-auto my-28 flex w-full max-w-sm flex-col px-4">
-        <div className="mx-auto inline-block w-16">
+        <div className="mx-20 inline-block w-16">
           <Logo />
         </div>
         <div className="mb-2 mt-2 w-full text-center text-2xl font-semibold uppercase">
