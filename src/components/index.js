@@ -12,6 +12,7 @@ import Button from "./Atoms/Button";
 import PageNotFound from "./Atoms/PageNotFound";
 import EmptyVideo from "./Video/EmptyVideo";
 import VideoGrid from "./Video/VideoGrid";
+import LoginPopup from "./Auth/LoginPopup";
 
 
 
@@ -33,6 +34,8 @@ export {
     PageNotFound,
     EmptyVideo,
     VideoGrid,
+    LoginPopup,
+    
     
 
 

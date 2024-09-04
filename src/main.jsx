@@ -40,9 +40,9 @@ const router = createBrowserRouter(
       <Route
         path="/login"
         element={
-          
+          <AuthLayout authentication={false}>
             <Login />
-         
+          </AuthLayout>
         }
       />
 
