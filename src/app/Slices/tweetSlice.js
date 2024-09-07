@@ -36,6 +36,19 @@ export const getTweet = createAsyncThunk("tweet/getTweet", async (userId) => {
 });
 
 
+export const getAllTweets = createAsyncThunk("tweet/getAllTweets", async () => {
+  try {
+    const response = await axiosInstance.get(`/tweets`);
+    //toast.success(response.data.message);
+    return response.data.data;
+  } catch (error) {
+    toast.error(parseErrorMessage(error.response.data));
+    console.log(error);
+    throw error;
+  }
+});
+
+
 export const updateTweet = createAsyncThunk("tweet/updateTweet", async ({ tweetId, data }) => {
   try {
     const response = await axiosInstance.patch(`/tweets/${tweetId}`, data);

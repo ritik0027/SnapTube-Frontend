@@ -18,9 +18,12 @@ import {
   PageNotFound,
   Home,
   Feed,
+  GuestTweets
 } from "./components/index.js";
 
 import FeedVideos from "./pages/FeedVideos.jsx";
+import FeedTweets from "./pages/FeedTweets.jsx";
+
 
 
 
@@ -34,6 +37,16 @@ const router = createBrowserRouter(
           {/* Home Page Feed Videos */}
           <Route path="" element={<FeedVideos />} />
         </Route>
+
+         {/* Home Page Feed Tweets */}
+        <Route
+            path="tweets"
+            element={
+              <AuthLayout authentication guestComponent={<GuestTweets />}>
+                <FeedTweets />
+              </AuthLayout>
+            }
+          />
       </Route>
 
       {/* Login  */}
