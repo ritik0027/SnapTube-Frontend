@@ -25,6 +25,8 @@ import GuestSubscribers from "./GuestPages/GuestSubscribers";
 import GuestTweets from "./GuestPages/GuestTweets";
 import EmptyTweet from "./Tweet/EmptyTweet";
 import TweetAtom from "./Tweet/TweetAtom";
+import ChangePassword  from "../app/Slices/authSlice";
+import EditPersonalInfo from "./Settings/EditPersonalInfo";
 
 
 
@@ -62,6 +64,9 @@ export {
     GuestTweets,
     EmptyTweet,
     TweetAtom,
+    ChangePassword,
+    EditPersonalInfo,
+    
     
 
 

@@ -85,7 +85,7 @@ function LoginPopup({ route, message = "Login to Continue..." }, ref) {
               >
                 {icons.cross}
               </button>
-              <Logo width="w-12" className="absolute  top-0 left-[45%] sm:w-12 " />
+              <Logo width="w-12" className="absolute -top-10 left-[23%]  sm:w-12 " />
               <h6 className="mx-auto mt-14 mb-2 text-2xl font-semibold">{message}</h6>
               <h6 className="mx-auto text-md mb-3">
                 Don't have an Account yet?{" "}

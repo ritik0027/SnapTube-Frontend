@@ -23,6 +23,7 @@ import {
 
 import FeedVideos from "./pages/FeedVideos.jsx";
 import FeedTweets from "./pages/FeedTweets.jsx";
+import Settings from "./pages/Settings.jsx";
 
 
 
@@ -44,6 +45,17 @@ const router = createBrowserRouter(
             element={
               <AuthLayout authentication guestComponent={<GuestTweets />}>
                 <FeedTweets />
+              </AuthLayout>
+            }
+          />
+
+
+          {/* Settings */}
+          <Route
+            path="settings"
+            element={
+              <AuthLayout authentication>
+                <Settings />
               </AuthLayout>
             }
           />
