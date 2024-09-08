@@ -27,7 +27,7 @@ function EmptyTweet() {
         </p>
         <h5 className="mb-2 font-semibold">No Tweets</h5>
         <p>
-          This channel has yet to make a<strong>Tweet</strong>.
+          This channel has yet to make a <strong>Tweet</strong>.
         </p>
       </div>
     </div>

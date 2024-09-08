@@ -124,11 +124,12 @@ function Settings() {
               Personal Information
             </button>
           </li>
+          
           <li key="change-pwd" className="w-full">
             <button
               onClick={() => setCurrentTab(2)}
               className={`w-full border-b-2 px-3 py-1.5 ${
-                currentTab === 2
+                currentTab === 1
                   ? "border-[#ae7aff] text-[#ae7aff] bg-white"
                   : "border-transparent text-gray-400"
               } `}
@@ -139,8 +140,7 @@ function Settings() {
         </ul>
 
         {currentTab === 0 && <EditPersonalInfo userData={userData} />}
-        {currentTab === 1 && <EditChannelInfo userData={userData} />}
-        {currentTab === 2 && <ChangePassword userData={userData} />}
+        {currentTab === 1 && <ChangePassword userData={userData} />}
         {/* <Outlet /> */}
       </div>
     </section>

@@ -18,12 +18,15 @@ import {
   PageNotFound,
   Home,
   Feed,
-  GuestTweets
+  GuestTweets,
+  GuestHistory,
+  GuestLikedVideos,
 } from "./components/index.js";
 
 import FeedVideos from "./pages/FeedVideos.jsx";
 import FeedTweets from "./pages/FeedTweets.jsx";
 import Settings from "./pages/Settings.jsx";
+import LikedVideos from "./pages/LikedVideos.jsx";
 
 
 
@@ -37,10 +40,9 @@ const router = createBrowserRouter(
         <Route path="" element={<Feed />}>
           {/* Home Page Feed Videos */}
           <Route path="" element={<FeedVideos />} />
-        </Route>
 
-         {/* Home Page Feed Tweets */}
-        <Route
+          {/* Home Page Feed Tweets */}
+          <Route
             path="tweets"
             element={
               <AuthLayout authentication guestComponent={<GuestTweets />}>
@@ -48,8 +50,15 @@ const router = createBrowserRouter(
               </AuthLayout>
             }
           />
-
-
+          {/* Liked Videos */}
+          <Route
+            path="feed/liked"
+            element={
+              <AuthLayout authentication guestComponent={<GuestLikedVideos />}>
+                <LikedVideos />
+              </AuthLayout>
+            }
+          />
           {/* Settings */}
           <Route
             path="settings"
@@ -59,7 +68,10 @@ const router = createBrowserRouter(
               </AuthLayout>
             }
           />
+        </Route>
+
       </Route>
+
 
       {/* Login  */}
       <Route
