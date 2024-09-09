@@ -27,6 +27,7 @@ import FeedVideos from "./pages/FeedVideos.jsx";
 import FeedTweets from "./pages/FeedTweets.jsx";
 import Settings from "./pages/Settings.jsx";
 import LikedVideos from "./pages/LikedVideos.jsx";
+import Support from "./pages/Support.jsx";
 
 
 
@@ -59,6 +60,12 @@ const router = createBrowserRouter(
               </AuthLayout>
             }
           />
+
+           {/* Support */}
+           <Route path="support" element={<Support />} />
+
+
+
           {/* Settings */}
           <Route
             path="settings"
