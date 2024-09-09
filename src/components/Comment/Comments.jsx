@@ -33,7 +33,7 @@ function Comments({ videoId, ownerAvatar }) {
       toast.warning("Please Enter some message...");
       return;
     }
-   
+
     setLocalCommentData(data);
     dispatch(addComment({ videoId, content }));
     inputRef.current.value = "";
@@ -99,7 +99,8 @@ function Comments({ videoId, ownerAvatar }) {
       </div>
     );
 
-  const comments = data || localCommentData;
+    const comments = Array.isArray(data) ? comments : [];
+
 
   // Something went wrong Comments...
   if (!status && !comments)
@@ -146,6 +147,7 @@ function Comments({ videoId, ownerAvatar }) {
       <hr className="my-4 border-white" />
 
       {/* comments */}
+
       {comments?.map((comment) => (
         <div key={comment._id}>
           <CommentAtom comment={comment} ownerAvatar={ownerAvatar} videoId={videoId} />

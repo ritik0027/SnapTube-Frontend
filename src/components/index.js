@@ -9,8 +9,10 @@ import Login from "./Auth/Login";
 import SignUp from "./Auth/SignUp";
 import Input from "./Atoms/Input";
 import Button from "./Atoms/Button";
+import VideoPlayer from "./Atoms/VideoPlayer";
 import LikesComponent from "./Atoms/LikesComponent";
-import  getLikedVideos  from "../app/Slices/likeSlice";
+import getLikedVideos  from "../app/Slices/likeSlice";
+import VideoDetails from "../pages/VideoDetails";
 import PageNotFound from "./Atoms/PageNotFound";
 import EmptyVideo from "./Video/EmptyVideo";
 import VideoGrid from "./Video/VideoGrid";
@@ -29,6 +31,8 @@ import EmptyTweet from "./Tweet/EmptyTweet";
 import TweetAtom from "./Tweet/TweetAtom";
 import ChangePassword  from "../app/Slices/authSlice";
 import EditPersonalInfo from "./Settings/EditPersonalInfo";
+import Comments  from "./Comment/Comments";
+import CommentAtom from "./Comment/CommentAtom"
 
 
 
@@ -69,19 +73,13 @@ export {
     ChangePassword,
     EditPersonalInfo,
     getLikedVideos,
-    VideoList
-
-    
-
-
-    
-    
-
-
-    
+    VideoList,
+    VideoDetails,
+    Comments,
+    CommentAtom,
+    VideoPlayer,
 
 
 
-    
 
 };

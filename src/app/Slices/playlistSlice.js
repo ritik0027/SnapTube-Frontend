@@ -36,6 +36,18 @@ export const getUserPlaylists = createAsyncThunk("playlist/getUserPlaylists", as
 });
 
 
+export const getCurrentPlaylists = createAsyncThunk("playlist/getCurrentPlaylists", async (videoId) => {
+    try {
+      const response = await axiosInstance.get(`/playlist/user/playlists/${videoId}`);
+      return response.data.data;
+    } catch (error) {
+      toast.error(parseErrorMessage(error.response.data));
+      console.log(error);
+      throw error;
+    }
+});
+
+
 export const createPlaylist = createAsyncThunk("playlist/createPlaylist", async ({ data }) => {
   try {
     const response = await axiosInstance.post(`/playlist/create-playlist`, data);

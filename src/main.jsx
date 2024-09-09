@@ -18,8 +18,8 @@ import {
   PageNotFound,
   Home,
   Feed,
+  VideoDetails,
   GuestTweets,
-  GuestHistory,
   GuestLikedVideos,
 } from "./components/index.js";
 
@@ -61,8 +61,8 @@ const router = createBrowserRouter(
             }
           />
 
-           {/* Support */}
-           <Route path="support" element={<Support />} />
+          {/* Support */}
+          <Route path="support" element={<Support />} />
 
 
 
@@ -76,6 +76,9 @@ const router = createBrowserRouter(
             }
           />
         </Route>
+        {/* Video Watching */}
+        <Route path="/watch/:videoId" element={<VideoDetails />} />
+
 
       </Route>
 
