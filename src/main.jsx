@@ -41,7 +41,6 @@ const router = createBrowserRouter(
         <Route path="" element={<Feed />}>
           {/* Home Page Feed Videos */}
           <Route path="" element={<FeedVideos />} />
-
           {/* Home Page Feed Tweets */}
           <Route
             path="tweets"
@@ -60,12 +59,8 @@ const router = createBrowserRouter(
               </AuthLayout>
             }
           />
-
           {/* Support */}
           <Route path="support" element={<Support />} />
-
-
-
           {/* Settings */}
           <Route
             path="settings"

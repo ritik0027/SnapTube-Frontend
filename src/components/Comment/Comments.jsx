@@ -33,7 +33,7 @@ function Comments({ videoId, ownerAvatar }) {
       toast.warning("Please Enter some message...");
       return;
     }
-
+    // OPTIMIZEME Optimize my performance by making a very small network request or no request for adding new comment
     setLocalCommentData(data);
     dispatch(addComment({ videoId, content }));
     inputRef.current.value = "";
@@ -99,8 +99,7 @@ function Comments({ videoId, ownerAvatar }) {
       </div>
     );
 
-    const comments = Array.isArray(data) ? comments : [];
-
+  const comments = data || localCommentData;
 
   // Something went wrong Comments...
   if (!status && !comments)
@@ -147,7 +146,6 @@ function Comments({ videoId, ownerAvatar }) {
       <hr className="my-4 border-white" />
 
       {/* comments */}
-
       {comments?.map((comment) => (
         <div key={comment._id}>
           <CommentAtom comment={comment} ownerAvatar={ownerAvatar} videoId={videoId} />
