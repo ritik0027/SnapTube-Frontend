@@ -18,14 +18,27 @@ function UserProfile({ userId }) {
 
   useEffect(() => {
     if (!userId) return;
-    dispatch(channelProfile(userId)).then((res) => setLocalData(res.payload));
-  }, [userId, dispatch]);
-
+    dispatch(channelProfile(userId))
+      .then((res) => {
+        if (res.payload) {
+          setLocalData(res.payload);
+        } else {
+          console.error("Failed to fetch user profile data");
+        }
+      })
+      .catch((err) => console.error(err));
+  }, [userId, dispatch]); 
+  
   async function handleToggleSubscription(channelId) {
     if (!authStatus) return loginPopupDialog.current?.open();
-    setLocalData((pre) => ({ ...pre, isSubscribed: !pre.isSubscribed }));
-    dispatch(toggleSubscription(channelId)).then(() => dispatch(channelProfile(userId)));
+  
+    setLocalData((prev) => prev && ({ ...prev, isSubscribed: !prev.isSubscribed }));
+    
+    dispatch(toggleSubscription(channelId))
+      .then(() => dispatch(channelProfile(userId)))
+      .catch((err) => console.error("Failed to toggle subscription", err));
   }
+  
 
   if ((!localData && loading) || !userId)
     return (
@@ -51,6 +64,7 @@ function UserProfile({ userId }) {
     );
 
   let profileData = userData || localData;
+
 
   // Something went wrong Profile...
   if (!profileData)
