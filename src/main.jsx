@@ -10,28 +10,36 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
-
 import {
+  ChannelPlaylist,
+  ChannelSubscribed,
+  ChannelTweets,
+  ChannelVideos,
+  Feed,
+  Home,
   Login,
   SignUp,
+  VideoDetail,
+  PlaylistVideos,
   AuthLayout,
-  PageNotFound,
-  Home,
-  Feed,
-  VideoDetails,
-  GuestTweets,
+  AboutChannel,
+  GuestHistory,
   GuestLikedVideos,
+  GuestSubscription,
+  GuestAdmin,
+  GuestMyChannel,
+  GuestSubscribers,
+  GuestTweets,
+  PageNotFound,
 } from "./components/index.js";
 
 import FeedVideos from "./pages/FeedVideos.jsx";
-import FeedTweets from "./pages/FeedTweets.jsx";
-import Settings from "./pages/Settings.jsx";
+import Channel from "./pages/Channel.jsx";
 import LikedVideos from "./pages/LikedVideos.jsx";
+import Settings from "./pages/Settings.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import FeedTweets from "./pages/FeedTweets.jsx";
 import Support from "./pages/Support.jsx";
-
-
-
-
 
 
 const router = createBrowserRouter(
@@ -41,6 +49,7 @@ const router = createBrowserRouter(
         <Route path="" element={<Feed />}>
           {/* Home Page Feed Videos */}
           <Route path="" element={<FeedVideos />} />
+
           {/* Home Page Feed Tweets */}
           <Route
             path="tweets"
@@ -50,6 +59,35 @@ const router = createBrowserRouter(
               </AuthLayout>
             }
           />
+
+          {/* Playlists */}
+          <Route path="playlist/:playlistId" element={<PlaylistVideos />} />
+
+          {/* All Other Channels */}
+          <Route path="user/:username" element={<Channel />}>
+            <Route path="" element={<ChannelVideos owner={false} />} />
+            <Route path="playlists" element={<ChannelPlaylist owner={false} />} />
+            <Route path="tweets" element={<ChannelTweets />} owner={false} />
+            <Route path="subscribed" element={<ChannelSubscribed owner={false} />} />
+            <Route path="about" element={<AboutChannel owner={false} />} />
+          </Route>
+
+          {/* Owning My Channel(currently Logged in user) */}
+          <Route
+            path="channel/:username"
+            element={
+              <AuthLayout authentication guestComponent={<GuestMyChannel />}>
+                <Channel owner />
+              </AuthLayout>
+            }
+          >
+            <Route path="" element={<ChannelVideos owner />} />
+            <Route path="tweets" element={<ChannelTweets owner />} />
+            <Route path="playlists" element={<ChannelPlaylist owner />} />
+            <Route path="subscribed" element={<ChannelSubscribed owner />} />
+            <Route path="about" element={<AboutChannel owner />} />
+          </Route>
+
           {/* Liked Videos */}
           <Route
             path="feed/liked"
@@ -59,8 +97,17 @@ const router = createBrowserRouter(
               </AuthLayout>
             }
           />
-          {/* Support */}
-          <Route path="support" element={<Support />} />
+
+          {/* <Subscribers /> */}
+          <Route
+            path="feed/subscribers"
+            element={
+              <AuthLayout authentication guestComponent={<GuestSubscribers />}>
+                <ChannelSubscribed owner isSubscribers />
+              </AuthLayout>
+            }
+          />
+
           {/* Settings */}
           <Route
             path="settings"
@@ -70,13 +117,24 @@ const router = createBrowserRouter(
               </AuthLayout>
             }
           />
+
+          {/* Support */}
+          <Route path="support" element={<Support />} />
         </Route>
+
         {/* Video Watching */}
-        <Route path="/watch/:videoId" element={<VideoDetails />} />
+        <Route path="/watch/:videoId" element={<VideoDetail />} />
 
-
+        {/* Admin Dashboard */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AuthLayout authentication guestComponent={<GuestAdmin />}>
+              <Dashboard />
+            </AuthLayout>
+          }
+        />
       </Route>
-
 
       {/* Login  */}
       <Route
@@ -101,13 +159,11 @@ const router = createBrowserRouter(
       {/* 404 */}
       <Route path="*" element={<PageNotFound />} />
     </Route>
-
-
-
-  ));
+  )
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
 );

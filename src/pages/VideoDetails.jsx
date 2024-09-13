@@ -15,7 +15,7 @@ import {
 } from "../app/Slices/playlistSlice";
 import { toast } from "react-toastify";
 
-function VideoDetail() {
+function VideoDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { videoId } = useParams();
@@ -848,4 +848,4 @@ function VideoDetail() {
   );
 }
 
-export default VideoDetail;
+export default VideoDetails;
