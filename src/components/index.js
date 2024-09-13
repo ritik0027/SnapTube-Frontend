@@ -20,14 +20,10 @@ import ChannelSubscribed from "./Subscription/ChannelSubscribed";
 import EmptySubscription from "./Subscription/EmptySubscription";
 import MyChannelEmptyVideo from "./Video/MyChannelEmptyVideo";
 import UploadVideo from "./Dashboard/VideoForm";
-import UploadingVideo from "./Dashboard/UploadingVideo";
-import UploadSuccess from "./Dashboard/UploadSuccess";
 import MyChannelEmptyTweet from "./Tweet/MyChannelEmptyTweet";
 import MyChannelTweets from "./Channel/MyChannelTweets";
 import EditPersonalInfo from "./Settings/EditPersonalInfo";
-import EditChannelInfo from "./Settings/EditChannelInfo";
 import ChangePassword from "./Settings/ChangePassword";
-import EditVideo from "./Dashboard/EditVideo";
 import DeleteVideo from "./Dashboard/DeleteVideo";
 import VideoGrid from "./Video/VideoGrid";
 import MyChannelVideos from "./Channel/MyChannelVideos";
@@ -53,7 +49,6 @@ import AdminVideoAtom from "./Dashboard/AdminVideoAtom";
 import PopupForm from "./Atoms/PopupForm";
 import ChannelState from "./Dashboard/ChannelState";
 import AdminPanelVideos from "./Dashboard/AdminPanelVideos";
-import AboutChannel from "./Channel/AboutChannel";
 import LoginPopup from "./Auth/LoginPopup";
 import GuestComponent from "./GuestPages/GuestComponent";
 import GuestAdmin from "./GuestPages/GuestAdmin";
@@ -78,7 +73,6 @@ export {
   GuestHistory,
   GuestAdmin,
   LoginPopup,
-  AboutChannel,
   PopupForm,
   AdminPanelVideos,
   StatusAtom,
@@ -114,13 +108,9 @@ export {
   Feed,
   ChangePassword,
   DeleteVideo,
-  EditVideo,
-  EditChannelInfo,
   MyChannelTweets,
   EditPersonalInfo,
   MyChannelEmptyTweet,
-  UploadingVideo,
-  UploadSuccess,
   UploadVideo,
   ChannelState,
   MyChannelEmptyVideo,
