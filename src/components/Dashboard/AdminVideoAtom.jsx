@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { formatDate, formatTimestamp } from "../../helpers/formatFigures";
 import { Link } from "react-router-dom";
 import { deleteVideo, togglePublish } from "../../app/Slices/videoSlice";
-import { ConfirmPopup, UploadVideo } from "../index";
+import { ConfirmPopup, VideoForm } from "../index";
 import { getChannelVideos } from "../../app/Slices/dashboardSlice";
 import { icons } from "../../assets/icons";
 
@@ -128,7 +128,7 @@ function AdminVideoAtom({ video }) {
           ref={confirmDialog}
           actionFunction={handleDeleteVideo}
         />
-        <UploadVideo ref={editDialog} video={video} />
+        <VideoForm ref={editDialog} video={video} />
         <div className="flex gap-4">
           {/* Delete Button */}
           <button

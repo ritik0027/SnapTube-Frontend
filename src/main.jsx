@@ -19,13 +19,10 @@ import {
   Home,
   Login,
   SignUp,
-  VideoDetail,
+  VideoDetails,
   PlaylistVideos,
   AuthLayout,
-  AboutChannel,
-  GuestHistory,
   GuestLikedVideos,
-  GuestSubscription,
   GuestAdmin,
   GuestMyChannel,
   GuestSubscribers,
@@ -69,7 +66,6 @@ const router = createBrowserRouter(
             <Route path="playlists" element={<ChannelPlaylist owner={false} />} />
             <Route path="tweets" element={<ChannelTweets />} owner={false} />
             <Route path="subscribed" element={<ChannelSubscribed owner={false} />} />
-            <Route path="about" element={<AboutChannel owner={false} />} />
           </Route>
 
           {/* Owning My Channel(currently Logged in user) */}
@@ -85,7 +81,6 @@ const router = createBrowserRouter(
             <Route path="tweets" element={<ChannelTweets owner />} />
             <Route path="playlists" element={<ChannelPlaylist owner />} />
             <Route path="subscribed" element={<ChannelSubscribed owner />} />
-            <Route path="about" element={<AboutChannel owner />} />
           </Route>
 
           {/* Liked Videos */}
@@ -123,7 +118,7 @@ const router = createBrowserRouter(
         </Route>
 
         {/* Video Watching */}
-        <Route path="/watch/:videoId" element={<VideoDetail />} />
+        <Route path="/watch/:videoId" element={<VideoDetails />} />
 
         {/* Admin Dashboard */}
         <Route

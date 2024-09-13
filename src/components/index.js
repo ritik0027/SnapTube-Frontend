@@ -19,7 +19,6 @@ import ChannelTweets from "./Tweet/ChannelTweets";
 import ChannelSubscribed from "./Subscription/ChannelSubscribed";
 import EmptySubscription from "./Subscription/EmptySubscription";
 import MyChannelEmptyVideo from "./Video/MyChannelEmptyVideo";
-import UploadVideo from "./Dashboard/VideoForm";
 import MyChannelEmptyTweet from "./Tweet/MyChannelEmptyTweet";
 import MyChannelTweets from "./Channel/MyChannelTweets";
 import EditPersonalInfo from "./Settings/EditPersonalInfo";
@@ -60,7 +59,9 @@ import GuestSubscribers from "./GuestPages/GuestSubscribers";
 import VideoPlayer from "./Atoms/VideoPlayer";
 import GuestTweets from "./GuestPages/GuestTweets";
 import PageNotFound from "./Atoms/PageNotFound";
-
+import VideoForm from "./Dashboard/VideoForm";
+import UploadingVideo from "./Dashboard/UploadingVideo";
+import UploadSuccess from "./Dashboard/UploadSuccess";
 export {
   PageNotFound,
   GuestTweets,
@@ -111,7 +112,6 @@ export {
   MyChannelTweets,
   EditPersonalInfo,
   MyChannelEmptyTweet,
-  UploadVideo,
   ChannelState,
   MyChannelEmptyVideo,
   EmptySubscription,
@@ -124,4 +124,9 @@ export {
   ChannelVideos,
   EmptyChannelVideo,
   VideoDetails,
+  VideoForm,
+  UploadingVideo,
+  UploadSuccess,
+
+
 };
