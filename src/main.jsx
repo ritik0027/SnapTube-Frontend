@@ -24,6 +24,7 @@ import {
   AuthLayout,
   GuestLikedVideos,
   GuestAdmin,
+  GuestHistory,
   GuestMyChannel,
   GuestSubscribers,
   GuestTweets,
@@ -36,6 +37,7 @@ import LikedVideos from "./pages/LikedVideos.jsx";
 import Settings from "./pages/Settings.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import FeedTweets from "./pages/FeedTweets.jsx";
+import History from "./pages/History.jsx";
 import Support from "./pages/Support.jsx";
 
 
@@ -82,6 +84,16 @@ const router = createBrowserRouter(
             <Route path="playlists" element={<ChannelPlaylist owner />} />
             <Route path="subscribed" element={<ChannelSubscribed owner />} />
           </Route>
+          
+          {/* User Feeds */}
+          <Route
+            path="feed/history"
+            element={
+              <AuthLayout authentication guestComponent={<GuestHistory />}>
+                <History />
+              </AuthLayout>
+            }
+          />
 
           {/* Liked Videos */}
           <Route
