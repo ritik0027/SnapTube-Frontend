@@ -27,7 +27,6 @@ function Channel({ owner = false }) {
     { name: "Playlists", route: "playlists" },
     { name: "Tweets", route: "tweets" },
     { name: "Subscribed", route: "subscribed" },
-    { name: "About", route: "about" },
   ];
 
   return profile ? (

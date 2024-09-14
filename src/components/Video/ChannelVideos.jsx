@@ -13,8 +13,8 @@ function ChannelVideos({ owner = false }) {
   const dispatch = useDispatch();
 
   let { username } = useParams();
-  let userId = useSelector((state) => state.user?.userData?._id);
-  let currentUser = useSelector((state) => state.auth.userData);
+  let userId = useSelector((state) => state.user?.data?._id);
+  let currentUser = useSelector((state) => state.auth.data);
 
   useEffect(() => {
     if (owner) {

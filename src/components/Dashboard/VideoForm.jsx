@@ -165,8 +165,6 @@ function VideoForm({ video = false }, ref) {
                     </>
                   )}
 
-                  {/* TODO: add thumbnail preview if exist */}
-                  {/* Thumbnail */}
                   <div className="w-full">
                     <label htmlFor="thumbnail" className="mb-1 inline-block hover:cursor-pointer">
                       Thumbnail

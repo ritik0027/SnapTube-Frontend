@@ -93,7 +93,7 @@ function MyChannel() {
                 Subscribed
               </button>
             </NavLink>
-          </li>n 
+          </li> 
         </ul>
         <Outlet />
       </div>
