@@ -3,6 +3,9 @@ import { Logo, LogoutBtn } from "../index";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { icons } from "../../assets/icons";
+import smallLogo from "../../assets/twidosmallLOGO.png";
+import mediumLogo from "../../assets/twidosmallLOGO.png";
+
 
 function Header() {
   let { userData, status: authStatus } = useSelector(({ auth }) => auth);
@@ -69,8 +72,39 @@ function Header() {
 
   return (
     <header className="sticky inset-x-0 top-0 z-50 w-full border-b border-white bg-[#121212] px-4">
-      <nav className="mx-auto flex items-center py-2 w-full">
-        <Logo />
+      <nav className="mx-auto flex items-center py-2 w-full ">
+        {/* Large Screen Logo (lg and above) */}
+        <div className="hidden lg:block">
+          <Logo />
+        </div>
+
+        {/* Medium Screen Logo (md to lg) */}
+        <Link to="/">
+        <div className="hidden md:block lg:hidden ">
+          <div className="flex items-center justify-center py-3">
+            <img
+              src={mediumLogo}
+              alt="Medium Logo"
+              className="h-15 w-20 py-3"
+            />
+            <div><h3 className="text-3xl font-semibold font-Playpen cursive font text-purple-500 ">Twido</h3></div>
+          </div>
+        </div>
+        </Link>
+
+
+        {/* Small Screen Logo (below md) */}
+        <Link to="/">
+        <div className="block md:hidden">
+          <img
+            src={smallLogo}
+            alt="Small Logo"
+            className="h-15 w-auto"
+          />
+        </div>
+        </Link>
+
+
         {/* Search bar */}
         <form
           onSubmit={(event) => {
@@ -105,9 +139,9 @@ function Header() {
           </div>
           <button
             type="submit"
-            className=" border-r border-b border-t rounded-r-xl px-3 py-1 bg-transparent hover:text-[#ae7aff] hover:bg-gray-500/10"
+            className="border-r border-b border-t rounded-r-xl px-3 py-1 bg-transparent hover:text-[#ae7aff] hover:bg-gray-500/10"
           >
-            <div className=" size-6 sm:size-8 flex items-center ">
+            <div className="size-6 sm:size-8 flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -126,7 +160,6 @@ function Header() {
             </div>
           </button>
         </form>
-
         {/* for small devices */}
         <form
           onSubmit={(event) => {
@@ -150,13 +183,11 @@ function Header() {
           </div>
         </form>
 
-        {/*Search Button*/}
-        {/* <button className="ml-auto sm:hidden">{icons.search}</button> */}
 
         {/* Hamburger Menu Style*/}
         <button className="group peer ml-4 flex w-6 shrink-0 flex-wrap gap-y-1.5 sm:hidden">
           <span className="block h-[2px] w-full bg-white group-hover:bg-[#ae7aff]"></span>
-          <span className="block h-[2px] w-2/3 bg-white group-hover:bg-[#ae7aff]"></span>
+          <span className="block h-[2px] w-2/3 bg-white group-hover:bg-[rgb(174,122,255)]"></span>
           <span className="block h-[2px] w-full bg-white group-hover:bg-[#ae7aff]"></span>
         </button>
 
@@ -173,8 +204,7 @@ function Header() {
                   key={item.title}
                   end
                   className={({ isActive }) =>
-                    `${
-                      isActive && "text-[#ae7aff] sm:bg-[#ae7aff] sm:text-black"
+                    `${isActive && "text-[#ae7aff] sm:bg-[#ae7aff] sm:text-black"
                     } flex flex-col items-center justify-center border-white py-1 focus:text-[#ae7aff] sm:w-full sm:flex-row sm:border sm:p-1.5 sm:hover:bg-[#ae7aff] sm:hover:text-white sm:focus:border-[#ae7aff] sm:focus:bg-[#ae7aff] sm:focus:text-black  lg:px-4`
                   }
                 >
