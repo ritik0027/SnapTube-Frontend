@@ -41,8 +41,12 @@ function VideoDetails() {
   function handlePlaylistVideo(playlistId, status) {
     if (!playlistId && !status) return;
 
-    if (status) dispatch(addVideoToPlaylist({ playlistId, videoId }));
-    else dispatch(removeVideoFromPlaylist({ playlistId, videoId }));
+    if (authStatus) {  // Only allow playlist modification if authenticated
+      if (status) dispatch(addVideoToPlaylist({ playlistId, videoId }));
+      else dispatch(removeVideoFromPlaylist({ playlistId, videoId }));
+    } else {
+      loginPopupDialog.current?.open();  // Prompt login if not authenticated
+    }
   }
 
   function handleCreateNewPlaylist(eventObj) {
@@ -51,11 +55,15 @@ function VideoDetails() {
 
     if (!name.trim()) return toast.error("Please enter the playlist name");
 
-    dispatch(createPlaylist({ data: { name } })).then((res) => {
-      if (res.meta.requestStatus === "fulfilled") {
-        dispatch(addVideoToPlaylist({ playlistId: res.payload?._id, videoId }));
-      }
-    });
+    if (authStatus) {  // Ensure only authenticated users can create playlists
+      dispatch(createPlaylist({ data: { name } })).then((res) => {
+        if (res.meta.requestStatus === "fulfilled") {
+          dispatch(addVideoToPlaylist({ playlistId: res.payload?._id, videoId }));
+        }
+      });
+    } else {
+      loginPopupDialog.current?.open();
+    }
   }
 
   function handleSavePlaylist() {
