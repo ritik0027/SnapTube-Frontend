@@ -127,7 +127,7 @@ function Settings() {
           
           <li key="change-pwd" className="w-full">
             <button
-              onClick={() => setCurrentTab(2)}
+              onClick={() => setCurrentTab(1)}
               className={`w-full border-b-2 px-3 py-1.5 ${
                 currentTab === 1
                   ? "border-[#ae7aff] text-[#ae7aff] bg-white"
