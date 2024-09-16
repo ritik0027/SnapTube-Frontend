@@ -18,6 +18,7 @@ function Channel({ owner = false }) {
     if (!owner && loggedInUsername === username) navigate(`/channel/${loggedInUsername}`);
     if (!username) return;
     dispatch(channelProfile(username)).then((res) => {
+      console.log(res.payload);
       setProfile(res.payload);
     });
   }, [username, loggedInUsername]);
@@ -44,19 +45,18 @@ function Channel({ owner = false }) {
         {/* Tab List */}
         <ul className="no-scrollbar sticky top-[66px] z-[2] flex flex-row gap-x-2 overflow-auto border-b-2 border-gray-400 bg-[#121212] py-2 sm:top-[82px]">
           {tabList?.map((item) => (
-            <li className="w-full">
+            <li key={item.route} className="w-full">  {/* Add key here */}
               <NavLink
                 to={item.route}
                 end
                 className={({ isActive }) =>
-                  `${
-                    isActive
-                      ? " bg-white/90 border-[#ae7aff] text-black rounded-t"
-                      : "text-[#ae7aff] "
-                  } w-full text-center flex justify-center border-b-2  px-3 py-1.5`
+                  `${isActive
+                    ? " bg-white/90 border-[#ae7aff] text-black rounded-t"
+                    : "text-[#ae7aff] "
+                  } w-full text-center flex justify-center border-b-2 px-3 py-1.5`
                 }
               >
-                <span className=" inline-block mx-auto ">{item.name}</span>
+                <span className="inline-block mx-auto">{item.name}</span>
               </NavLink>
             </li>
           ))}
