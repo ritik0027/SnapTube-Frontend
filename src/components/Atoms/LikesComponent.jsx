@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleLike } from "../../app/Slices/likeSlice";
+import { toggleVideoLike ,toggleCommentLike , toggleTweetLike} from "../../app/Slices/likeSlice";
 import { toast } from "react-toastify";
 import { LoginPopup } from "..";
 
@@ -61,12 +61,11 @@ function LikesComponent({
     setDislike((pre) => ({ ...pre, isDisLiked: localDislike, totalDisLikes: localTotalDisLike }));
 
     let qs = "";
-    if (videoId) qs = `videoId=${videoId}`;
-    else if (commentId) qs = `commentId=${commentId}`;
-    else if (tweetId) qs = `tweetId=${tweetId}`;
+    if (videoId) dispatch(toggleVideoLike(videoId));
+    else if (commentId) dispatch(toggleCommentLike(commentId));
+    else if (tweetId) dispatch(toggleTweetLike(tweetId));
     else return toast.error("No id found");
 
-    dispatch(toggleLike({ qs, toggleLike: status }));
   };
 
   return (
