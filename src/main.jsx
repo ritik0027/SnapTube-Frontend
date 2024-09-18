@@ -39,6 +39,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import FeedTweets from "./pages/FeedTweets.jsx";
 import History from "./pages/History.jsx";
 import Support from "./pages/Support.jsx";
+import SearchResult from "./pages/SearchResult";
 
 
 const router = createBrowserRouter(
@@ -84,6 +85,10 @@ const router = createBrowserRouter(
             <Route path="playlists" element={<ChannelPlaylist owner />} />
             <Route path="subscribed" element={<ChannelSubscribed owner />} />
           </Route>
+
+           {/* Search Results */}
+           <Route path="/results" element={<SearchResult />} />
+
           
           {/* User Feeds */}
           <Route
