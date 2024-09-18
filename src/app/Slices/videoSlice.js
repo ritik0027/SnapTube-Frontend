@@ -121,9 +121,9 @@ export const updateView = createAsyncThunk("video/updateView", async (videoId) =
 });
 
 
-export const getAllVideos = createAsyncThunk("video/getAllVideos", async () => {
+export const getAllVideos = createAsyncThunk("video/getAllVideos", async (userId) => {
   try {
-    const response = await axiosInstance.get(`/videos/get-all-videos`);
+    const response = await axiosInstance.get(`/videos/${userId}`);
     return response.data.data;
   } 
   catch (error) {

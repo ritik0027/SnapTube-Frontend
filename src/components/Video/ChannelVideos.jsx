@@ -10,22 +10,31 @@ import { Link, useParams } from "react-router-dom";
 function ChannelVideos({ owner = false }) {
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useDispatch();
+  const [error, setError] = useState(null); // Added error state
 
-  let { username } = useParams();
-  let userId = useSelector((state) => state.user?.data?._id);
-  let currentUser = useSelector((state) => state.auth.data);
+  const dispatch = useDispatch();
+  const { username } = useParams();
+  const currentUser = useSelector((state) => state.auth.data);
+  const userId = owner ? currentUser?._id : useSelector((state) => state.user?.data?._id);
 
   useEffect(() => {
-    if (owner) {
-      userId = currentUser?._id;
-    }
     if (!userId) return;
-    dispatch(getAllVideos(userId)).then((res) => {
-      setVideos(res.payload);
-      setIsLoading(false);
-    });
-  }, [username, userId]);
+
+    const fetchVideos = async () => {
+      try {
+        const res = dispatch(getAllVideos(userId));
+        setVideos(res.payload);
+      } catch (err) {
+        setError(err.message || 'Failed to load videos');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchVideos();
+  }, [username, userId, dispatch, owner, currentUser]);
+
+  if (error) return <div>Error: {error}</div>;
 
   if (isLoading) {
     return (
