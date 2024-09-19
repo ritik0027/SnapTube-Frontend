@@ -10,9 +10,9 @@ const initialState = {
   data: null,
 };
 
-export const createTweet = createAsyncThunk("tweet/createTweet", async ({ data }) => {
+export const createTweet = createAsyncThunk("tweet/createTweet", async ({ content }) => {
   try {
-    const response = await axiosInstance.post(`/tweets/create-tweet`, data);
+    const response = await axiosInstance.post(`/tweets/create-tweet`,{ content });
     return response.data.data;
   } 
   catch (error) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import EmptyTweet from "./EmptyTweet";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -36,13 +36,11 @@ function ChannelTweets({ owner = false }) {
       toast.error("Content is required");
       setFocus("tweet");
       return;
-    } 
-    else if (data.tweet.trim()?.length < 10) {
+    } else if (data.tweet.trim()?.length < 10) {
       toast.error("Minimum 10 characters are required");
       setFocus("tweet");
       return;
-    } 
-    else if (data.tweet.trim()?.length > 500) {
+    } else if (data.tweet.trim()?.length > 500) {
       toast.error("Maximum 500 characters are allowed");
       setFocus("tweet");
       return;
