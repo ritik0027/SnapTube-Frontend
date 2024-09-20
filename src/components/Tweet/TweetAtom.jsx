@@ -3,13 +3,14 @@ import { Button, LikesComponent } from "../index";
 import { useState } from "react";
 import { formatTimestamp } from "../../helpers/formatFigures";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { deleteTweet, updateTweet } from "../../app/Slices/tweetSlice";
+import { useDispatch , useSelector } from "react-redux";
+import { deleteTweet, updateTweet , getTweet } from "../../app/Slices/tweetSlice";
 import { Link } from "react-router-dom";
 
 function TweetAtom({ tweet, owner, authStatus }) {
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(tweet?.content);
+  let userId = useSelector(({ user }) => user.userData?._id);
   const dispatch = useDispatch();
   const inputRef = useRef();
 
@@ -44,7 +45,9 @@ function TweetAtom({ tweet, owner, authStatus }) {
   }
 
   function handleDelete() {
-    dispatch(deleteTweet({ tweetId: tweet._id }));
+    dispatch(deleteTweet({ tweetId: tweet._id })).then(()=>{
+      dispatch(getTweet(userId));
+    });
   }
 
   return (
