@@ -1,14 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import EmptyTweet from "./EmptyTweet";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTweet, createTweet } from "../../app/Slices/tweetSlice";
-import { MyChannelEmptyTweet, TweetAtom } from "../index";
+import {  MyChannelEmptyTweet, TweetAtom } from "../index";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-// OPTIMIZEME: Optimize this tweets
 
 function ChannelTweets({ owner = false }) {
   const dispatch = useDispatch();
@@ -45,7 +44,7 @@ function ChannelTweets({ owner = false }) {
       setFocus("tweet");
       return;
     }
-    dispatch(createTweet({ data })).then(() => {
+    dispatch(createTweet({ content:data.tweet })).then(() => {
       getTweet(currentUser?._id);
       reset();
     });

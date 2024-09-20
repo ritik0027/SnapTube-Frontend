@@ -10,14 +10,16 @@ const initialState = {
   data: null,
 };
 
-export const createTweet = createAsyncThunk("tweet/createTweet", async ({ content }) => {
+export const createTweet = createAsyncThunk("tweet/createTweet", async ( content ) => {
   try {
-    const response = await axiosInstance.post(`/tweets/create-tweet`,{ content });
+    console.log("Sending content:",  content );
+
+    const response = await axiosInstance.post(`/tweets/create-tweet`, content );
+
     return response.data.data;
-  } 
-  catch (error) {
-    toast.error(parseErrorMessage(error.response.data));
-    console.log(error);
+  } catch (error) {
+    console.error("Error occurred:", error);
+    toast.error(parseErrorMessage(error.response?.data || error.message));
     throw error;
   }
 });
@@ -85,6 +87,9 @@ const tweetSlice = createSlice({
     });
     builder.addCase(createTweet.fulfilled, (state, action) => {
       state.loading = false;
+      if (!Array.isArray(state.data)) {
+        state.data = []; // Ensure data is an array
+      }
       state.data.unshift(action.payload);
       state.status = true;
     });
