@@ -49,7 +49,7 @@ export const publishVideo = createAsyncThunk("video/publishVideo", async ({ data
 
 export const getVideo = createAsyncThunk("video/getVideo", async (videoId) => {
   try {
-    const response = await axiosInstance.get(`/videos/${videoId}`);
+    const response = await axiosInstance.get(`/videos/video/${videoId}`);
     return response.data.data;
   } 
   catch (error) {
