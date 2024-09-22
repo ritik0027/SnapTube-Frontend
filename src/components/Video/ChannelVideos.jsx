@@ -4,37 +4,29 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getAllVideos } from "../../app/Slices/videoSlice";
+import { getChannelVideos } from "../../app/Slices/dashboardSlice"
 import { formatTimestamp, formatVideoDuration } from "../../helpers/formatFigures";
 import { Link, useParams } from "react-router-dom";
 
 function ChannelVideos({ owner = false }) {
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null); // Added error state
-
   const dispatch = useDispatch();
-  const { username } = useParams();
-  const currentUser = useSelector((state) => state.auth.data);
-  const userId = owner ? currentUser?._id : useSelector((state) => state.user?.data?._id);
+
+  let { username } = useParams();
+  let userId = useSelector((state) => state.user?.userData?._id);
+  let currentUser = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
+    if (owner) {
+      userId = currentUser?._id;
+    }
     if (!userId) return;
-
-    const fetchVideos = async () => {
-      try {
-        const res = dispatch(getAllVideos(userId));
-        setVideos(res.payload);
-      } catch (err) {
-        setError(err.message || 'Failed to load videos');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchVideos();
-  }, [username, userId, dispatch, owner, currentUser]);
-
-  if (error) return <div>Error: {error}</div>;
+    dispatch(getChannelVideos()).then((res) => {
+      setVideos(res.payload);
+      setIsLoading(false);
+    });
+  }, [username, userId]);
 
   if (isLoading) {
     return (
