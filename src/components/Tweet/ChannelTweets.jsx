@@ -45,7 +45,7 @@ function ChannelTweets({ owner = false }) {
       return;
     }
     dispatch(createTweet({ content:data.tweet })).then(() => {
-      getTweet(currentUser?._id);
+      dispatch(getTweet(currentUser?._id));
       reset();
     });
   }
