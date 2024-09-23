@@ -134,6 +134,19 @@ export const getAllVideos = createAsyncThunk("video/getAllVideos", async (userId
 });
 
 
+export const getUserChannelVideos = createAsyncThunk("video/getUserChannelVideos", async (username) => {
+  try {
+    const response = await axiosInstance.get(`/videos/v/${username}`);
+    console.log(response)
+    return response.data.data;
+  } 
+  catch (error) {
+    toast.error(parseErrorMessage(error.response.data));
+    console.log(error);
+    throw error;
+  }
+});
+
 
 
 const videoSlice = createSlice({
@@ -186,6 +199,20 @@ const videoSlice = createSlice({
       state.status = true;
     });
     builder.addCase(getAllVideos.rejected, (state) => {
+      state.loading = false;
+      state.status = false;
+    });
+
+    // Get User Channel videos
+    builder.addCase(getUserChannelVideos.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getUserChannelVideos.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data = action.payload;
+      state.status = true;
+    });
+    builder.addCase(getUserChannelVideos.rejected, (state) => {
       state.loading = false;
       state.status = false;
     });

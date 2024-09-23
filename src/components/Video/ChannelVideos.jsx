@@ -3,8 +3,7 @@ import { EmptyChannelVideo, MyChannelEmptyVideo } from "../index";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getAllVideos } from "../../app/Slices/videoSlice";
-import { getChannelVideos } from "../../app/Slices/dashboardSlice"
+import { getUserChannelVideos } from "../../app/Slices/videoSlice";
 import { formatTimestamp, formatVideoDuration } from "../../helpers/formatFigures";
 import { Link, useParams } from "react-router-dom";
 
@@ -22,7 +21,7 @@ function ChannelVideos({ owner = false }) {
       userId = currentUser?._id;
     }
     if (!userId) return;
-    dispatch(getChannelVideos()).then((res) => {
+    dispatch(getUserChannelVideos(username)).then((res) => {
       setVideos(res.payload);
       setIsLoading(false);
     });
@@ -31,6 +30,20 @@ function ChannelVideos({ owner = false }) {
   if (isLoading) {
     return (
       <div className="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] gap-3 pt-4">
+        <div className="w-full">
+          <div className="relative mb-1 w-full pt-[56%]">
+            <div className="absolute inset-0 bg-slate-100/10 rounded animate-pulse"></div>
+          </div>
+          <div className="mb-1 rounded bg-slate-100/10 animate-pulse h-8 w-full"></div>
+          <div className="flex rounded text-gray-200 bg-slate-100/10 animate-pulse h-5 w-full"></div>
+        </div>
+        <div className="w-full">
+          <div className="relative mb-1 w-full pt-[56%]">
+            <div className="absolute inset-0 bg-slate-100/10 rounded animate-pulse"></div>
+          </div>
+          <div className="mb-1 rounded bg-slate-100/10 animate-pulse h-8 w-full"></div>
+          <div className="flex rounded text-gray-200 bg-slate-100/10 animate-pulse h-5 w-full"></div>
+        </div>
         <div className="w-full">
           <div className="relative mb-1 w-full pt-[56%]">
             <div className="absolute inset-0 bg-slate-100/10 rounded animate-pulse"></div>
@@ -87,7 +100,7 @@ function ChannelVideos({ owner = false }) {
               </span>
             </div>
             <div className="flex items-center">
-              <img src={video.owner[0]?.avatar} className="w-11 rounded-full" />
+              <img src={video.owner?.avatar} className="w-11 rounded-full" />
               <span className="ml-3">
                 <h6 className="mb-1 font-semibold">{video?.title}</h6>
                 <p className="flex text-sm text-gray-200">
