@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { clearWatchHistory, watchHistory } from "../app/Slices/authSlice";
@@ -7,18 +7,22 @@ import { icons } from "../assets/icons";
 
 function History() {
   const dispatch = useDispatch();
+  const [videos,setVideos]=useState([]);
 
-  const { userData, loading } = useSelector(({ auth }) => auth);
+  const { loading } = useSelector(({ auth }) => auth);
 
   useEffect(() => {
-    dispatch(watchHistory());
+    dispatch(watchHistory()).then((res) => {
+      setVideos(res.payload);
+    });
+
   }, []);
 
   const deleteWatchHistory = () => {
     dispatch(clearWatchHistory());
   };
 
-  const videos = useSelector(({ auth }) => auth.userData.watchHistory);
+  //const videos = useSelector(({ auth }) => auth.userData.watchHistory);
 
   const isHistoryEmpty = !loading && videos?.length < 1;
 
