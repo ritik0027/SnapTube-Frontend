@@ -27,6 +27,7 @@ function ChannelTweets({ owner = false }) {
     if (!userId) return;
     dispatch(getTweet(userId)).then((res) => {
       if (res.meta.requestStatus == "fulfilled") setLocalTweets(res.payload);
+      console.log(res)
     });
   }, [username, userId, authStatus]);
 
@@ -45,7 +46,7 @@ function ChannelTweets({ owner = false }) {
       return;
     }
     dispatch(createTweet({ content:data.tweet })).then(() => {
-      dispatch(getTweet(currentUser?._id));
+      dispatch(getTweet(userId));
       reset();
     });
   }

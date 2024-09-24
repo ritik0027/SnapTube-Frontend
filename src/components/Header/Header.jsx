@@ -31,6 +31,11 @@ function Header() {
       icon: icons.Home,
     },
     {
+      name: "Tweets",
+      route: "tweets",
+      icon: icons.Tweets,
+    },
+    {
       name: "Liked Videos",
       route: "feed/liked",
       icon: icons.Like,
