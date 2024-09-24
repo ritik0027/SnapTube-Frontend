@@ -22,9 +22,10 @@ import {
   VideoDetails,
   PlaylistVideos,
   AuthLayout,
-  GuestLikedVideos,
-  GuestAdmin,
   GuestHistory,
+  GuestLikedVideos,
+  GuestSubscription,
+  GuestAdmin,
   GuestMyChannel,
   GuestSubscribers,
   GuestTweets,
@@ -33,14 +34,13 @@ import {
 
 import FeedVideos from "./pages/FeedVideos.jsx";
 import Channel from "./pages/Channel.jsx";
+import History from "./pages/History.jsx";
 import LikedVideos from "./pages/LikedVideos.jsx";
 import Settings from "./pages/Settings.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import FeedTweets from "./pages/FeedTweets.jsx";
-import History from "./pages/History.jsx";
 import Support from "./pages/Support.jsx";
-import SearchResult from "./pages/SearchResult";
-
+import SearchResult from "./pages/SearchResult.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -86,10 +86,9 @@ const router = createBrowserRouter(
             <Route path="subscribed" element={<ChannelSubscribed owner />} />
           </Route>
 
-           {/* Search Results */}
-           <Route path="/results" element={<SearchResult />} />
+          {/* Search Results */}
+          <Route path="/results" element={<SearchResult />} />
 
-          
           {/* User Feeds */}
           <Route
             path="feed/history"
