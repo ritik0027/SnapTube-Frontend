@@ -42,6 +42,20 @@ export const getAllTweets = createAsyncThunk("tweet/getAllTweets", async () => {
   try {
     const response = await axiosInstance.get(`/tweets`);
     //toast.success(response.data.message);
+    console.log(response.data.data)
+    return response.data.data;
+  } catch (error) {
+    toast.error(parseErrorMessage(error.response.data));
+    console.log(error);
+    throw error;
+  }
+});
+
+
+export const getAllUserFeedTweets = createAsyncThunk("tweet/getAllUserFeedTweets", async () => {
+  try {
+    const response = await axiosInstance.get(`/tweets/feed`);
+    //toast.success(response.data.message);
     return response.data.data;
   } catch (error) {
     toast.error(parseErrorMessage(error.response.data));
@@ -111,6 +125,21 @@ const tweetSlice = createSlice({
       state.loading = false;
       state.status = false;
     });
+    
+    //get All User Feed Tweets
+    builder.addCase(getAllUserFeedTweets.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getAllUserFeedTweets.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data = action.payload;
+      state.status = true;
+    });
+    builder.addCase(getAllUserFeedTweets.rejected, (state) => {
+      state.loading = false;
+      state.status = false;
+    });
+
 
     // Update tweet
     builder.addCase(updateTweet.pending, (state) => {

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { createTweet, getAllTweets } from "../app/Slices/tweetSlice";
+import { createTweet, getAllUserFeedTweets , getAllTweets } from "../app/Slices/tweetSlice";
 import { TweetAtom, EmptyTweet, LoginPopup } from "../components/index";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";

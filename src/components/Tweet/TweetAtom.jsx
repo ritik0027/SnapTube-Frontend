@@ -4,7 +4,7 @@ import { useState } from "react";
 import { formatTimestamp } from "../../helpers/formatFigures";
 import { toast } from "react-toastify";
 import { useDispatch , useSelector } from "react-redux";
-import { deleteTweet, updateTweet , getTweet } from "../../app/Slices/tweetSlice";
+import { deleteTweet, updateTweet , getAllTweets } from "../../app/Slices/tweetSlice";
 import { Link } from "react-router-dom";
 
 function TweetAtom({ tweet, owner, authStatus }) {
@@ -46,7 +46,7 @@ function TweetAtom({ tweet, owner, authStatus }) {
 
   function handleDelete() {
     dispatch(deleteTweet({ tweetId: tweet._id })).then(()=>{
-      dispatch(getTweet(userId));
+      dispatch(getAllTweets());
     });
   }
 
