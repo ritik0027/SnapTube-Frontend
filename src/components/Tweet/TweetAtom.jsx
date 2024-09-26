@@ -1,16 +1,15 @@
 import React, { useEffect, useRef } from "react";
-import { Button, LikesComponent } from "../index";
+import { Button, CommentLike, LikesComponent } from "../index";
 import { useState } from "react";
 import { formatTimestamp } from "../../helpers/formatFigures";
 import { toast } from "react-toastify";
-import { useDispatch , useSelector } from "react-redux";
-import { deleteTweet, updateTweet , getAllTweets } from "../../app/Slices/tweetSlice";
+import { useDispatch } from "react-redux";
+import { deleteTweet, getTweet, updateTweet } from "../../app/Slices/tweetSlice";
 import { Link } from "react-router-dom";
 
 function TweetAtom({ tweet, owner, authStatus }) {
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(tweet?.content);
-  let userId = useSelector(({ user }) => user.userData?._id);
   const dispatch = useDispatch();
   const inputRef = useRef();
 
@@ -31,12 +30,10 @@ function TweetAtom({ tweet, owner, authStatus }) {
     if (!content.trim()) {
       toast.warning("Please enter some message");
       return;
-    } 
-    else if (content.trim()?.length < 10) {
+    } else if (content.trim()?.length < 10) {
       toast.error("Minimum 10 characters are required");
       return;
-    } 
-    else if (content.trim()?.length > 500) {
+    } else if (content.trim()?.length > 500) {
       toast.error("Maximum 500 characters are allowed");
       return;
     }
@@ -45,9 +42,7 @@ function TweetAtom({ tweet, owner, authStatus }) {
   }
 
   function handleDelete() {
-    dispatch(deleteTweet({ tweetId: tweet._id })).then(()=>{
-      dispatch(getAllTweets());
-    });
+    dispatch(deleteTweet({ tweetId: tweet._id }));
   }
 
   return (

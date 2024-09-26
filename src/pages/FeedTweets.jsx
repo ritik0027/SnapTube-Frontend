@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { createTweet, getAllUserFeedTweets , getAllTweets } from "../app/Slices/tweetSlice";
+import { createTweet, getAllTweets } from "../app/Slices/tweetSlice";
 import { TweetAtom, EmptyTweet, LoginPopup } from "../components/index";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -28,13 +28,11 @@ function FeedTweets({ owner = false }) {
       toast.error("Content is required");
       setFocus("tweet");
       return;
-    } 
-    else if (data.tweet.trim()?.length < 10) {
+    } else if (data.tweet.trim()?.length < 10) {
       toast.error("Minimum 10 characters are required");
       setFocus("tweet");
       return;
-    } 
-    else if (data.tweet.trim()?.length > 500) {
+    } else if (data.tweet.trim()?.length > 500) {
       toast.error("Maximum 500 characters are allowed");
       setFocus("tweet");
       return;
@@ -266,6 +264,9 @@ function FeedTweets({ owner = false }) {
           ></textarea>
 
           <div className="flex items-center justify-end gap-x-3 px-3">
+            {/* Emoji button */}
+            {/* <button type="button" className="inline-block h-5 w-5 hover:text-[#ae7aff]"></button> */}
+            {/* Cancel button */}
             <button
               type="button"
               onClick={() => reset()}
