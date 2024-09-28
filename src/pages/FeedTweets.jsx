@@ -37,7 +37,8 @@ function FeedTweets({ owner = false }) {
       setFocus("tweet");
       return;
     }
-    dispatch(createTweet({ content:data.tweet })).then(() => {
+    dispatch(createTweet({ content:data.tweet })).then((res) => {
+      setLocalTweets((prevTweets) => [res.payload, ...prevTweets]);
       dispatch(getAllTweets());
       reset();
     });
@@ -242,7 +243,7 @@ function FeedTweets({ owner = false }) {
     );
   }
 
-  let tweets = data || localTweets;
+  let tweets = localTweets || data;
 
   // Something went wrong
   if (!status && !tweets) {
