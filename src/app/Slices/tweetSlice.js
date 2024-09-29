@@ -83,13 +83,13 @@ export const deleteTweet = createAsyncThunk("tweet/deleteTweet", async ({ tweetI
     const response = await axiosInstance.delete(`/tweets/${tweetId}`);
     toast.success(response.data.message);
     return response.data.data;
-  } 
-  catch (error) {
+  } catch (error) {
     toast.error(parseErrorMessage(error.response.data));
     console.log(error);
     throw error;
   }
 });
+
 
 const tweetSlice = createSlice({
   name: "tweet",
