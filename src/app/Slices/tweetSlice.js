@@ -161,7 +161,7 @@ const tweetSlice = createSlice({
     });
     builder.addCase(deleteTweet.fulfilled, (state, action) => {
       state.loading = false;
-      const filteredTweets = (state.tweets || []).filter(tweet => tweet.id !== action.payload);
+      let filteredTweets = state.data.filter((tweet) => tweet._id !== action.payload._id);
       state.data = filteredTweets;
       state.status = true;
     });
@@ -169,6 +169,7 @@ const tweetSlice = createSlice({
       state.loading = false;
       state.status = false;
     });
+
   },
 });
 
