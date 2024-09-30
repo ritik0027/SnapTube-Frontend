@@ -2,7 +2,7 @@ import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCurrentUser } from "./app/Slices/authSlice";
-import { healthCheck } from "./app/Slices/healthcheck";
+import { healthCheck } from "./app/Slices/healthCheck";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
