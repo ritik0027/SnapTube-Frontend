@@ -4,7 +4,7 @@ import Aside from "./Aside";
 import Home from "./Home";
 import AuthLayout from "./Auth/AuthLayout";
 import Login from "./Auth/Login";
-import SignUp from "./Auth/SignUp";
+import SignUp from "./Auth/Signup";
 import Feed from "./Feed";
 import EmptyVideo from "./Video/EmptyVideo";
 import VideoList from "./Video/VideoList";

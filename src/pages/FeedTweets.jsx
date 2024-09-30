@@ -39,6 +39,7 @@ function FeedTweets({ owner = false }) {
     }
     dispatch(createTweet({ content:data.tweet })).then((res) => {
       setLocalTweets((prevTweets) => [res.payload, ...prevTweets]);
+      console.log(res.payload)
       dispatch(getAllTweets());
       reset();
     });

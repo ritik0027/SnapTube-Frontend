@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const initialState = {
   loading: false,
   status: false,
-  data: null,
+  data: [],
 };
 
 export const createTweet = createAsyncThunk("tweet/createTweet", async ( content ) => {
@@ -52,17 +52,17 @@ export const getAllTweets = createAsyncThunk("tweet/getAllTweets", async () => {
 });
 
 
-export const getAllUserFeedTweets = createAsyncThunk("tweet/getAllUserFeedTweets", async () => {
-  try {
-    const response = await axiosInstance.get(`/tweets/feed`);
-    //toast.success(response.data.message);
-    return response.data.data;
-  } catch (error) {
-    toast.error(parseErrorMessage(error.response.data));
-    console.log(error);
-    throw error;
-  }
-});
+// export const getAllUserFeedTweets = createAsyncThunk("tweet/getAllUserFeedTweets", async () => {
+//   try {
+//     const response = await axiosInstance.get(`/tweets/feed`);
+//     //toast.success(response.data.message);
+//     return response.data.data;
+//   } catch (error) {
+//     toast.error(parseErrorMessage(error.response.data));
+//     console.log(error);
+//     throw error;
+//   }
+// });
 
 
 export const updateTweet = createAsyncThunk("tweet/updateTweet", async ({ tweetId, data }) => {
@@ -105,6 +105,7 @@ const tweetSlice = createSlice({
         state.data = []; // Ensure data is an array
       }
       state.data.unshift(action.payload);
+      console.log("")
       state.status = true;
     });
     builder.addCase(createTweet.rejected, (state) => {
@@ -127,15 +128,16 @@ const tweetSlice = createSlice({
     });
     
     //get All User Feed Tweets
-    builder.addCase(getAllUserFeedTweets.pending, (state) => {
+    builder.addCase(getAllTweets.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getAllUserFeedTweets.fulfilled, (state, action) => {
+    builder.addCase(getAllTweets.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
+      console.log("state data in get req",state.data)
       state.status = true;
     });
-    builder.addCase(getAllUserFeedTweets.rejected, (state) => {
+    builder.addCase(getAllTweets.rejected, (state) => {
       state.loading = false;
       state.status = false;
     });
@@ -161,8 +163,16 @@ const tweetSlice = createSlice({
     });
     builder.addCase(deleteTweet.fulfilled, (state, action) => {
       state.loading = false;
-      let filteredTweets = state.data.filter((tweet) => tweet._id !== action.payload._id);
-      state.data = filteredTweets;
+      console.log("delete tweet:",action.payload);
+      console.log("delete tweet state:",state);
+      // state.loading = false;
+
+      // Ensure the state's data isn't empty before filtering
+      if (state.data && state.data.length > 0) {
+        let filteredTweets = state.data.filter((tweet) => tweet._id !== action.payload._id);
+        state.data = filteredTweets;
+      }
+    
       state.status = true;
     });
     builder.addCase(deleteTweet.rejected, (state) => {
