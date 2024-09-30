@@ -13,7 +13,7 @@ import EmptyChannelVideo from "./Video/EmptyChannelVideo";
 import ChannelVideos from "./Video/ChannelVideos";
 import EmptyPlaylist from "./Playlist/EmptyPlaylist";
 import ChannelPlaylist from "./Playlist/ChannelPlaylist";
-import PlaylistVideos from "./Playlist/PlaylistVideos";
+import PlaylistVideos from "./Playlist/PlayListVideos";
 import EmptyTweet from "./Tweet/EmptyTweet";
 import ChannelTweets from "./Tweet/ChannelTweets";
 import ChannelSubscribed from "./Subscription/ChannelSubscribed";
