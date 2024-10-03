@@ -244,7 +244,7 @@ function FeedTweets({ owner = false }) {
     );
   }
 
-  let tweets = localTweets || data;
+  let tweets = data || localTweets;
 
   // Something went wrong
   if (!status && !tweets) {
