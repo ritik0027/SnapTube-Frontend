@@ -372,7 +372,7 @@ function VideoDetails() {
                       Save
                     </button>
                     {/* save to playlist popup */}
-                    {/* OPTIMIZEME: FIX glitch and improve user experience */}
+                    
                     {authStatus && (
                       <div className="absolute right-0 top-full z-10 hidden w-64 overflow-hidden rounded-lg bg-[#121212] p-4 shadow shadow-slate-50/30 hover:block peer-focus:block">
                         <h3 className="mb-4 text-center text-lg font-semibold">Save to playlist</h3>
